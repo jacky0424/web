@@ -1,86 +1,105 @@
-// AI 對話框功能
-function toggleChat() {
-    const messages = document.getElementById('chatMessages');
-    const input = document.querySelector('.ai-chat-input');
-    const button = document.querySelector('.minimize-btn');
-    
-    if (messages.style.display === 'none') {
-        // 展開對話框
-        messages.style.display = 'flex';
-        input.style.display = 'flex';
-        button.textContent = '−';  // 更改按鈕符號為減號
-    } else {
-        // 最小化對話框
-        messages.style.display = 'none';
-        input.style.display = 'none';
-        button.textContent = '+';  // 更改按鈕符號為加號
-    }
-}
-
-// 發送訊息功能
-function sendMessage() {
-    const input = document.getElementById('messageInput');
-    const message = input.value.trim();
-    
-    if (message) {
-        // 添加用戶訊息
-        addMessage(message, 'user');
+class ChatApp {
+    constructor() {
+        this.chatMessages = document.getElementById('chatMessages');
+        this.userInput = document.getElementById('userInput');
+        this.sendButton = document.getElementById('sendButton');
         
-        // 模擬AI回覆
-        setTimeout(() => {
-            const responses = [
-                "我了解您的需求，讓我為您詳細說明。",
-                "這是個很好的問題，我很樂意為您解答。",
-                "感謝您的提問，我們可以這樣處理。",
-                "我建議您可以考慮以下方案...",
-            ];
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            addMessage(randomResponse, 'ai');
-        }, 1000);
+        // API 端點
+        this.API_URL = 'https://free.churchless.tech/v1/chat/completions';
         
-        // 清空輸入框
-        input.value = '';
+        this.setupEventListeners();
     }
-}
 
-// 添加訊息到對話框
-function addMessage(text, type) {
-    const messages = document.getElementById('chatMessages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${type}`;
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'avatar';
-    avatar.textContent = type === 'user' ? '👤' : '🤖';
-    
-    const textDiv = document.createElement('div');
-    textDiv.className = 'text';
-    textDiv.textContent = text;
-    
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(textDiv);
-    messages.appendChild(messageDiv);
-    
-    // 滾動到最新訊息
-    messages.scrollTop = messages.scrollHeight;
-}
-
-// 允許按Enter鍵發送訊息
-document.getElementById('messageInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-// 確保DOM加載完成後初始化事件監聽器
-document.addEventListener('DOMContentLoaded', function() {
-    // 初始化輸入框的Enter鍵事件
-    const input = document.getElementById('messageInput');
-    if (input) {
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
+    setupEventListeners() {
+        this.sendButton.addEventListener('click', () => this.sendMessage());
+        this.userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
             }
         });
     }
+
+    async sendMessage() {
+        const message = this.userInput.value.trim();
+        if (!message) return;
+
+        // 顯示用戶訊息
+        this.addMessage(message, 'user');
+        this.userInput.value = '';
+
+        // 顯示正在輸入指示器
+        const typingIndicator = this.addTypingIndicator();
+
+        try {
+            const response = await this.getAIResponse(message);
+            // 移除輸入指示器
+            typingIndicator.remove();
+            // 顯示 AI 回應
+            this.addMessage(response, 'ai');
+        } catch (error) {
+            console.error('Error:', error);
+            typingIndicator.remove();
+            this.addMessage('抱歉，發生錯誤。請稍後再試。', 'ai');
+        }
+    }
+
+    async getAIResponse(message) {
+        const requestBody = {
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'user',
+                    content: message
+                }
+            ]
+        };
+
+        try {
+            const response = await fetch(this.API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content;
+        } catch (error) {
+            console.error('API Error:', error);
+            throw error;
+        }
+    }
+
+    addMessage(content, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${type}-message`);
+        messageDiv.textContent = content;
+        this.chatMessages.appendChild(messageDiv);
+        this.scrollToBottom();
+        return messageDiv;
+    }
+
+    addTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.classList.add('typing-indicator');
+        indicator.textContent = 'AI 正在輸入...';
+        this.chatMessages.appendChild(indicator);
+        this.scrollToBottom();
+        return indicator;
+    }
+
+    scrollToBottom() {
+        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+    }
+}
+
+// 初始化應用
+document.addEventListener('DOMContentLoaded', () => {
+    new ChatApp();
 }); 
