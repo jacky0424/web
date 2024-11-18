@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人網站</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 首頁標題區 -->
+    <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg');">
+        <div class="hero-content">
+            <h1>歡迎來到我的個人網站</h1>
+            <p>網頁設計師 / 前端開發者</p>
+            <button class="cta-button">了解更多</button>
+        </div>
+    </section>
+
+    <!-- 關於我 -->
+    <section class="section" id="about">
+        <div class="content">
+            <h2>關於我</h2>
+            <p>我是一位充滿熱情的網頁開發者，專注於創造優秀的使用者體驗和具有吸引力的網頁設計。</p>
+        </div>
+    </section>
+
+    <!-- 服務項目 -->
+    <section class="section services">
+        <h2>服務項目</h2>
+        <div class="grid">
+            <div class="item">
+                <h3>UI/UX設計</h3>
+                <p>創造直覺且美觀的使用者介面，提供最佳的使用者體驗。</p>
+            </div>
+            <div class="item">
+                <h3>網站建置</h3>
+                <p>使用最新技術開發響應式網站，確保在各種裝置上都能完美呈現。</p>
+            </div>
+            <div class="item">
+                <h3>品牌行銷</h3>
+                <p>協助您建立品牌形象，提升網路曝光度。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示 -->
+    <section class="section portfolio">
+        <h2>作品展示</h2>
+        <div class="grid">
+            <div class="item">
+                <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg" alt="網頁設計作品">
+                <h3>響應式網站設計</h3>
+                <p>使用最新技術打造的現代化網站</p>
+            </div>
+            <div class="item">
+                <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg" alt="行動應用設計">
+                <h3>行動應用介面</h3>
+                <p>直覺化的使用者介面設計</p>
+            </div>
+            <div class="item">
+                <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg" alt="品牌設計">
+                <h3>品牌識別設計</h3>
+                <p>完整的品牌視覺系統規劃</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡表單 -->
+    <section class="section" id="contact">
+        <h2>聯絡我</h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">電子郵件</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">訊息</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">發送訊息</button>
+            </form>
+        </div>
+        <div class="contact-info">
+            <div class="social">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <p>&copy; 2024 我的個人網站. All rights reserved.</p>
+    </footer>
+
+    <!-- AI 聊天助手 -->
+    <div class="ai-chat-container">
+        <div class="ai-chat-header">
+            <span>AI 助手</span>
+            <button class="minimize-btn" onclick="toggleChat()">−</button>
+        </div>
+        <div id="chatMessages" class="ai-chat-messages"></div>
+        <div class="ai-chat-input">
+            <input type="text" id="messageInput" placeholder="請輸入您的問題...">
+            <button onclick="sendMessage()">發送</button>
+        </div>
+    </div>
+
+    <!-- Font Awesome 圖標 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="script.js"></script>
+</body>
+</html> 
+
