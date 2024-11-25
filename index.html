@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人網站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#projects">作品集</a></li>
+                <li><a href="#contact">聯絡我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首頁區塊 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>歡迎來到我的個人網站</h1>
+            <p>網頁開發者 / UI設計師 / 創意工作者</p>
+            <a href="#projects" class="cta-button">查看作品</a>
+        </div>
+    </section>
+
+    <!-- 關於我 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>關於我</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>我是一位充滿熱情的網頁開發者，專注於創造優秀的使用者體驗和具有吸引力的網頁設計。</p>
+                    <p>我相信每個優秀的網站都應該是藝術與技術的完美結合。透過持續學習和創新，我致力於為客戶打造獨特且實用的數位解決方案。</p>
+                    <p>無論是個人網站、企業形象網站，還是電子商務平台，我都能為您提供專業的建議和服務。</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg" alt="工作照片">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>作品集</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg" alt="專案1">
+                    <h3>響應式網站設計</h3>
+                    <p>使用最新技術打造的現代化網站</p>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg" alt="專案2">
+                    <h3>電商平台開發</h3>
+                    <p>全方位的電子商務解決方案</p>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg" alt="專案3">
+                    <h3>行動應用設計</h3>
+                    <p>直覺化的使用者介面設計</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡表單 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>聯絡我</h2>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">電子郵件</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">訊息</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">發送訊息</button>
+                </form>
+                <div class="contact-info">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI 聊天助手 -->
+    <div class="ai-chat-container">
+        <div class="ai-chat-header">
+            <span>AI 助手</span>
+            <button class="minimize-btn" onclick="toggleChat()">−</button>
+        </div>
+        <div id="chatMessages" class="ai-chat-messages">
+            <!-- 訊息會在這裡動態添加 -->
+        </div>
+        <div class="ai-chat-input">
+            <textarea id="userInput" placeholder="輸入您的訊息..." rows="2"></textarea>
+            <button id="sendButton">發送</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
